@@ -1,6 +1,6 @@
 # My Node Deployment Scripts
 This project shares the capistrano scripts I normally use for my 
-node.js based applications, stolen shamelessly from [nuclear moose]. It uses upstart on the serverside to run
+node.js based applications, stolen shamelessly from [Nuclear Rooster](http://dev.nuclearrooster.com/2010/07/18/capistrano-scripts-for-node-js/) with some adaptions. It uses upstart on the serverside to run
 node as a daemon and respawns on server crash.
 
 I use this script on three production sites and it has worked like a 
