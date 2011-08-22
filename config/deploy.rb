@@ -5,7 +5,7 @@ require 'capistrano/ext/multistage'
 set :application, "your-application-name"
 set :node_file, "app.js"                  # this is the entry point to your app that should run as a deamon
 set :host, "localhost"                    # host your app will deploy to. List represents multiple hosts
-set :repository, "git@github.com:jamescarr/sample-node-app.git"  # duh
+set :repository, "git@github.com:jamescarr/node-capistrano-script.git"  # duh
 set :user, "node"                               # user to ssh in as
 set :admin_runner, 'node'                       # user to run the application node_file as
 set :application_binary, '/usr/local/bin/node'  # application for running your app. Use coffee for coffeescript apps
@@ -31,7 +31,7 @@ namespace :deploy do
 
   desc "Check required packages and install if packages are not installed"
   task :update_packages, roles => :app do
-    run "cd #{release_path}/twilio && npm install"
+    run "cd #{release_path} && npm install"
   end
 
   task :create_deploy_to_with_sudo, :roles => :app do
@@ -53,7 +53,7 @@ namespace :deploy do
       export NODE_ENV="#{node_env}"
       cd #{current_path}
 
-      exec sudo -u #{admin_runner} sh -c "NODE_ENV=#{node_env} #{application_binary} #{current_path}/twilio/#{node_file} #{application_port} >> #{shared_path}/log/#{node_env}.log 2>&1"
+      exec sudo -u #{admin_runner} sh -c "NODE_ENV=#{node_env} #{application_binary} #{current_path}/#{node_file} #{application_port} >> #{shared_path}/log/#{node_env}.log 2>&1"
   end script
   respawn
 UPSTART
